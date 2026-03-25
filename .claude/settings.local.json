@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Users/MoisesC/AppData/Roaming/**)",
+      "Bash(cmd /c 'node --version')",
+      "Bash(cmd /c \"where node && node --version && npm --version\")",
+      "Bash(cmd /c \"node -v\")",
+      "Bash(echo \"exit: $?\")",
+      "Read(//c/Users/MoisesC/AppData/Local/**)",
+      "Read(//c/Users/MoisesC/**)",
+      "Read(//c/Users/MoisesC/scoop/apps/**)",
+      "Bash(export PATH=\"/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/VisualStudio/NodeJs:$PATH\")",
+      "Bash(\"/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/VisualStudio/NodeJs/npx.cmd\" create-next-app@latest G:/DEVELOOT/Honorgg --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Bash(NODE_PATH=\"/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/VisualStudio/NodeJs\")",
+      "Bash(NPM=\"$NODE_PATH/node_modules/npm/bin/npm-cli.js\")",
+      "Bash(\"$NODE_PATH/node.exe\" \"$NPM\" --version)",
+      "Bash(NODE=\"$NODE_PATH/node.exe\")",
+      "Bash(NPM_CLI=\"$NODE_PATH/node_modules/npm/bin/npm-cli.js\")",
+      "Bash(\"$NODE\" \"$NPM_CLI\" exec --yes create-next-app@latest -- . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Bash(powershell.exe -Command \"node --version\")",
+      "Bash(\"/c/Users/MoisesC/AppData/Local/Programs/cursor/resources/app/resources/helpers/node.exe\" --version)",
+      "Bash(powershell.exe -Command \"winget install --id OpenJS.NodeJS.LTS -e --silent\")",
+      "Bash(powershell.exe -Command \"node --version; npm --version\")",
+      "Bash(\"/c/Program Files/nodejs/node.exe\" --version)",
+      "Bash(\"/c/Program Files/nodejs/node.exe\" \"/c/Program Files/nodejs/node_modules/npm/bin/npm-cli.js\" --version)",
+      "Bash(NODE=\"/c/Program Files/nodejs/node.exe\")",
+      "Bash(NPM_CLI=\"/c/Program Files/nodejs/node_modules/npm/bin/npm-cli.js\")",
+      "Bash(export PATH=\"/c/Program Files/nodejs:$PATH\")",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --yes)",
+      "Read(//g/DEVELOOT/**)",
+      "Bash(npx create-next-app@latest honorgg --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --yes)"
+    ]
+  }
+}
