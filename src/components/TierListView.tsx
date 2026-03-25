@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -112,8 +113,9 @@ export function TierListView({ contentTypes, tierData }: Props) {
                           return (
                             <Tooltip key={entry.specId}>
                               <TooltipTrigger>
+                                <Link href={`/specs/${entry.specId}?content=${ct.id}`}>
                                 <div
-                                  className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border cursor-default transition-all hover:brightness-110"
+                                  className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border cursor-pointer transition-all hover:brightness-110 hover:scale-105"
                                   style={{
                                     borderColor: `${cls.color}35`,
                                     backgroundColor: `${cls.color}0D`,
@@ -135,6 +137,7 @@ export function TierListView({ contentTypes, tierData }: Props) {
                                   </div>
                                   <RolePip role={spec.role} />
                                 </div>
+                                </Link>
                               </TooltipTrigger>
                               <TooltipContent side="top" className="max-w-[220px]">
                                 <div className="flex items-center gap-2 mb-1">
