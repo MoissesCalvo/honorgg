@@ -1,7 +1,7 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { WOW_CLASSES, WOW_SPECS, CONTENT_TYPES, TIER_CONFIG, ROLES } from "@/lib/wow-data";
 import { getTierList } from "@/lib/tier-data";
-import { Badge } from "@/components/ui/badge";
 
 interface Props {
   params: Promise<{ classId: string }>;
@@ -29,11 +29,16 @@ export default async function ClassPage({ params }: Props) {
     <div className="max-w-5xl mx-auto px-4 py-10">
       {/* Header */}
       <div className="flex items-center gap-4 mb-10">
-        <span className="text-5xl">{cls.icon}</span>
+        <Image
+          src={cls.iconUrl}
+          alt={cls.name}
+          width={64}
+          height={64}
+          className="rounded-xl shrink-0"
+          unoptimized
+        />
         <div>
-          <h1 className="text-4xl font-bold" style={{ color: cls.color }}>
-            {cls.name}
-          </h1>
+          <h1 className="text-4xl font-bold" style={{ color: cls.color }}>{cls.name}</h1>
           <p className="text-muted-foreground mt-1">
             {specs.length} specialization{specs.length !== 1 ? "s" : ""} &bull; Midnight 12.0.5
           </p>
@@ -66,12 +71,17 @@ export default async function ClassPage({ params }: Props) {
                       style={{ borderColor: config ? `${config.color}30` : "var(--border)" }}
                     >
                       <div className="flex items-start justify-between mb-3">
-                        <div className="flex items-center gap-2">
-                          <span className="text-2xl">{spec.icon}</span>
+                        <div className="flex items-center gap-3">
+                          <Image
+                            src={spec.iconUrl}
+                            alt={spec.name}
+                            width={40}
+                            height={40}
+                            className="rounded-lg shrink-0"
+                            unoptimized
+                          />
                           <div>
-                            <p className="font-bold" style={{ color: cls.color }}>
-                              {spec.name}
-                            </p>
+                            <p className="font-bold" style={{ color: cls.color }}>{spec.name}</p>
                             <span
                               className="text-[10px] px-1.5 py-0.5 rounded-full"
                               style={{ backgroundColor: `${roleConfig?.color}20`, color: roleConfig?.color }}
@@ -89,11 +99,9 @@ export default async function ClassPage({ params }: Props) {
                           </span>
                         )}
                       </div>
-                      {entry?.notes && (
-                        <p className="text-xs text-muted-foreground">{entry.notes}</p>
-                      )}
+                      {entry?.notes && <p className="text-xs text-muted-foreground mb-2">{entry.notes}</p>}
                       {entry && (
-                        <div className="mt-3">
+                        <div className="mt-2">
                           <div className="flex justify-between text-xs text-muted-foreground mb-1">
                             <span>Score</span>
                             <span>{entry.score}/100</span>
@@ -101,10 +109,7 @@ export default async function ClassPage({ params }: Props) {
                           <div className="h-1.5 bg-secondary rounded-full overflow-hidden">
                             <div
                               className="h-full rounded-full transition-all"
-                              style={{
-                                width: `${entry.score}%`,
-                                backgroundColor: config?.color ?? "#888",
-                              }}
+                              style={{ width: `${entry.score}%`, backgroundColor: config?.color ?? "#888" }}
                             />
                           </div>
                         </div>

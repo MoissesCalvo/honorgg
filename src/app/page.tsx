@@ -1,6 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { WOW_CLASSES, WOW_SPECS, TIER_CONFIG, CONTENT_TYPES, getClassById, getSpecById } from "@/lib/wow-data";
+import { WOW_CLASSES, TIER_CONFIG, CONTENT_TYPES, getClassById, getSpecById } from "@/lib/wow-data";
 import { getTierList } from "@/lib/tier-data";
 
 export default function HomePage() {
@@ -40,7 +41,7 @@ export default function HomePage() {
 
       {/* Content Type Cards */}
       <section className="mb-16">
-        <h2 className="text-xl font-semibold mb-6 text-muted-foreground uppercase tracking-widest text-sm">
+        <h2 className="text-sm font-semibold mb-6 text-muted-foreground uppercase tracking-widest">
           Browse by Content
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -50,9 +51,7 @@ export default function HomePage() {
                 <div className="text-3xl mb-3">
                   {ct.id === "mythic_plus" ? "🔑" : ct.id === "raid" ? "⚔️" : "🏆"}
                 </div>
-                <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">
-                  {ct.label}
-                </h3>
+                <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">{ct.label}</h3>
                 <p className="text-sm text-muted-foreground">
                   {ct.id === "mythic_plus"
                     ? "Best specs for high keys and weekly vault"
@@ -73,9 +72,7 @@ export default function HomePage() {
             <span style={{ color: TIER_CONFIG.S.color }}>S Tier</span>{" "}
             <span className="text-muted-foreground font-normal text-base">— Mythic+</span>
           </h2>
-          <Link href="/tier-list" className="text-sm text-primary hover:underline">
-            Full list →
-          </Link>
+          <Link href="/tier-list" className="text-sm text-primary hover:underline">Full list →</Link>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {sSpecs.map((entry) => {
@@ -88,19 +85,22 @@ export default function HomePage() {
                 className="border rounded-lg p-4 bg-card tier-glow-s flex items-center gap-3"
                 style={{ borderColor: `${cls.color}40` }}
               >
-                <span className="text-2xl">{spec.icon}</span>
+                <Image
+                  src={spec.iconUrl}
+                  alt={`${spec.name} ${cls.name}`}
+                  width={36}
+                  height={36}
+                  className="rounded-md shrink-0"
+                  unoptimized
+                />
                 <div>
-                  <p className="font-semibold text-sm" style={{ color: cls.color }}>
-                    {spec.name}
-                  </p>
+                  <p className="font-semibold text-sm" style={{ color: cls.color }}>{spec.name}</p>
                   <p className="text-xs text-muted-foreground">{cls.name}</p>
                 </div>
                 <span
                   className="ml-auto text-xs font-bold px-2 py-0.5 rounded"
                   style={{ backgroundColor: TIER_CONFIG.S.bg, color: TIER_CONFIG.S.color }}
-                >
-                  S
-                </span>
+                >S</span>
               </div>
             );
           })}
@@ -117,7 +117,14 @@ export default function HomePage() {
                 className="group border rounded-lg p-3 bg-card hover:bg-card/80 transition-all cursor-pointer flex items-center gap-2"
                 style={{ borderColor: `${cls.color}30` }}
               >
-                <span className="text-xl">{cls.icon}</span>
+                <Image
+                  src={cls.iconUrl}
+                  alt={cls.name}
+                  width={28}
+                  height={28}
+                  className="rounded-sm shrink-0"
+                  unoptimized
+                />
                 <span
                   className="text-sm font-medium group-hover:brightness-125 transition-all"
                   style={{ color: cls.color }}

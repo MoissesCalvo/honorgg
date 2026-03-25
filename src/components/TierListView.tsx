@@ -1,16 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   ContentType,
   WowRole,
   TIER_CONFIG,
   ROLES,
-  WOW_SPECS,
-  WOW_CLASSES,
   TierRank,
   getClassById,
   getSpecById,
@@ -92,7 +90,7 @@ export function TierListView({ contentTypes }: Props) {
                   return (
                     <div
                       key={tier}
-                      className="flex gap-3 rounded-xl border overflow-hidden"
+                      className="flex gap-0 rounded-xl border overflow-hidden"
                       style={{ borderColor: `${config.color}30` }}
                     >
                       {/* Tier Label */}
@@ -114,13 +112,20 @@ export function TierListView({ contentTypes }: Props) {
                             <Tooltip key={entry.specId}>
                               <TooltipTrigger>
                                 <div
-                                  className="flex items-center gap-2 px-3 py-2 rounded-lg border cursor-default transition-all hover:brightness-110"
+                                  className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border cursor-default transition-all hover:brightness-110"
                                   style={{
                                     borderColor: `${cls.color}35`,
                                     backgroundColor: `${cls.color}0D`,
                                   }}
                                 >
-                                  <span className="text-base">{spec.icon}</span>
+                                  <Image
+                                    src={spec.iconUrl}
+                                    alt={`${spec.name} ${cls.name}`}
+                                    width={28}
+                                    height={28}
+                                    className="rounded-sm shrink-0"
+                                    unoptimized
+                                  />
                                   <div className="leading-tight">
                                     <p className="text-xs font-bold" style={{ color: cls.color }}>
                                       {spec.name}
@@ -130,14 +135,20 @@ export function TierListView({ contentTypes }: Props) {
                                   <RolePip role={spec.role} />
                                 </div>
                               </TooltipTrigger>
-                              <TooltipContent side="top" className="max-w-[200px]">
-                                <p className="font-semibold">
-                                  {spec.name} {cls.name}
-                                </p>
-                                {entry.notes && <p className="text-xs text-muted-foreground mt-0.5">{entry.notes}</p>}
-                                <p className="text-xs text-muted-foreground mt-0.5">
-                                  Score: {entry.score}/100
-                                </p>
+                              <TooltipContent side="top" className="max-w-[220px]">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <Image
+                                    src={cls.iconUrl}
+                                    alt={cls.name}
+                                    width={20}
+                                    height={20}
+                                    className="rounded-sm"
+                                    unoptimized
+                                  />
+                                  <p className="font-semibold">{spec.name} {cls.name}</p>
+                                </div>
+                                {entry.notes && <p className="text-xs text-muted-foreground">{entry.notes}</p>}
+                                <p className="text-xs text-muted-foreground mt-0.5">Score: {entry.score}/100</p>
                               </TooltipContent>
                             </Tooltip>
                           );
@@ -177,14 +188,9 @@ export function TierListView({ contentTypes }: Props) {
 function RolePip({ role }: { role: WowRole }) {
   const roleConfig = ROLES.find((r) => r.id === role);
   if (!roleConfig) return null;
-  const icons: Record<WowRole, string> = {
-    tank: "🛡",
-    healer: "💚",
-    melee: "⚔",
-    ranged: "🏹",
-  };
+  const icons: Record<WowRole, string> = { tank: "🛡", healer: "💚", melee: "⚔", ranged: "🏹" };
   return (
-    <span className="text-[10px] ml-1 opacity-60" title={roleConfig.label}>
+    <span className="text-[10px] ml-0.5 opacity-50" title={roleConfig.label}>
       {icons[role]}
     </span>
   );
