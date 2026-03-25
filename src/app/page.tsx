@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { WOW_CLASSES, TIER_CONFIG, CONTENT_TYPES, getClassById, getSpecById } from "@/lib/wow-data";
 import { getTierList } from "@/lib/tier-data";
 
-export default function HomePage() {
-  const mplusList = getTierList("mythic_plus");
+export default async function HomePage() {
+  const mplusList = await getTierList("mythic_plus");
   const sSpecs = mplusList?.entries.filter((e) => e.rank === "S").slice(0, 4) ?? [];
 
   return (

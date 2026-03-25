@@ -13,15 +13,16 @@ import {
   getClassById,
   getSpecById,
 } from "@/lib/wow-data";
-import { getTierList } from "@/lib/tier-data";
+import { TierList } from "@/lib/tier-data";
 
 const TIERS: TierRank[] = ["S", "A", "B", "C", "D"];
 
 interface Props {
   contentTypes: { id: ContentType; label: string }[];
+  tierData: Record<string, TierList | null>;
 }
 
-export function TierListView({ contentTypes }: Props) {
+export function TierListView({ contentTypes, tierData }: Props) {
   const [activeRole, setActiveRole] = useState<WowRole | "all">("all");
 
   return (
@@ -68,7 +69,7 @@ export function TierListView({ contentTypes }: Props) {
         </TabsList>
 
         {contentTypes.map((ct) => {
-          const tierList = getTierList(ct.id);
+          const tierList = tierData[ct.id];
           if (!tierList) return null;
 
           return (

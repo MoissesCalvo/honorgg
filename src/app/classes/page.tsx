@@ -8,8 +8,8 @@ export const metadata = {
   description: "Browse all World of Warcraft classes and their specs.",
 };
 
-export default function ClassesPage() {
-  const mplusList = getTierList("mythic_plus");
+export default async function ClassesPage() {
+  const mplusList = await getTierList("mythic_plus");
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">

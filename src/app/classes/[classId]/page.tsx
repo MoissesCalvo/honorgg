@@ -7,6 +7,8 @@ interface Props {
   params: Promise<{ classId: string }>;
 }
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   return WOW_CLASSES.map((cls) => ({ classId: cls.id }));
 }
@@ -24,6 +26,7 @@ export default async function ClassPage({ params }: Props) {
   if (!cls) notFound();
 
   const specs = WOW_SPECS.filter((s) => s.classId === classId);
+  const tierLists = await Promise.all(CONTENT_TYPES.map((ct) => getTierList(ct.id)));
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
@@ -47,8 +50,8 @@ export default async function ClassPage({ params }: Props) {
 
       {/* Specs across content types */}
       <div className="space-y-10">
-        {CONTENT_TYPES.map((ct) => {
-          const tierList = getTierList(ct.id);
+        {CONTENT_TYPES.map((ct, i) => {
+          const tierList = tierLists[i];
           if (!tierList) return null;
 
           return (
